@@ -2,6 +2,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import allure
 
 
 class HomePage:
@@ -11,17 +12,20 @@ class HomePage:
 
     def open(self):
         """Открывает главную страницу."""
-        self.browser.get("https://www.demoblaze.com/index.html")
+        with allure.step("Open home page"):
+            self.browser.get("https://www.demoblaze.com/index.html")
 
     def click_galaxy_s6(self):
         """Кликает по ссылке Samsung Galaxy S6."""
-        galaxy_s6 = self.browser.find_element(
-            By.XPATH, '//a[text()="Samsung galaxy s6"]'
-        )
-        galaxy_s6.click()
+        with allure.step("Open product page Samsung Galaxy S6"):
+            galaxy_s6 = self.browser.find_element(
+                By.XPATH, '//a[text()="Samsung galaxy s6"]'
+            )
+            galaxy_s6.click()
 
     def click_monitors(self):
         """Выбирает категорию 'Мониторы' и ждет загрузки товаров."""
+
         monitor_link = self.browser.find_element(
             By.XPATH, "//a[@onclick=\"byCat('monitor')\"]"
         )
@@ -29,7 +33,8 @@ class HomePage:
         old_products = self.browser.find_elements(By.CSS_SELECTOR, ".card.h-100")
         old_product = old_products[0] if old_products else None
 
-        monitor_link.click()
+        with allure.step("Open category 'monitors'"):
+            monitor_link.click()
         wait = WebDriverWait(self.browser, 5)
 
         if old_product:
@@ -43,4 +48,5 @@ class HomePage:
 
     def check_products_count(self, count: int):
         """Проверяет, что количество товаров равно `count`."""
-        assert len(self.products) == count
+        with allure.step("Check count monitors"):
+            assert len(self.products) == count

@@ -1,5 +1,6 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
+import allure
 
 
 class ProductPage:
@@ -9,4 +10,5 @@ class ProductPage:
     def check_title_is(self, title: str):
         """Проверяет, что название товара равно `title`."""
         page_title = self.browser.find_element(By.TAG_NAME, "h2")
-        assert page_title.text == title
+        with allure.step("Check product title"):
+            assert page_title.text == title

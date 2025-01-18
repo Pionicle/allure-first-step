@@ -1,8 +1,9 @@
-# **Selenium + Pytest: Тестирование интернет-магазина**
+# **Selenium + Pytest + Allure: Тестирование интернет-магазина**
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue.svg)  
 ![Pytest](https://img.shields.io/badge/Pytest-%3E%3D8.0-orange.svg)  
-![Selenium](https://img.shields.io/badge/Selenium-%3E%3D4.0-darkgreen.svg)
+![Selenium](https://img.shields.io/badge/Selenium-%3E%3D4.0-darkgreen.svg)  
+![Static Badge](https://img.shields.io/badge/Allure-%3E%3D2.13-darkyellow.svg)
 
 ## **Описание**
 
@@ -10,7 +11,7 @@
 
 ## **Функциональность**
 
-- Тестирование выбора категорий товаров "Мониторы"
+- Тестирование выбора категории товаров "Мониторы"
 - Проверка открытия страниц товаров
 
 ---
@@ -53,7 +54,8 @@ pytest -v -s --headless
 ### **3. Запуск тестов с отчетом `Allure`**
 
 ```sh
-pytest --alluredir=reports
+pytest --alluredir results
+allure generate .\results\
 allure serve reports
 ```
 
